@@ -19,7 +19,7 @@ def kahendotsing(massiiv, esimene, viimane, otsitav):	# Defineerin massiivi, esi
 massiiv = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 otsitav = 7
 
-indeks = kahendotsing(massiiv, 0, len(massiiv)-1, otsitav)
+indeks = kahendotsing(massiiv, 0, len(massiiv)-1, otsitav)  # massiiv ise, esimene indeks, massiivis olevate elementide arv -1, et saada indeks, otsitav väärtus
 
 if indeks == -1:
     print("Arvu", otsitav, "ei esine massiivis", massiiv)
