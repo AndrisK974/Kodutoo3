@@ -1,0 +1,85 @@
+Ülesanne 3, 4, 5, boonus google docs link: https://docs.google.com/document/d/16zc1FefvCF7GMfSmH7JfpWUTg2aPsrIXWao0UmI7GgY/edit?usp=sharing
+
+Kopeerin ka selle igaks juhuks siia, kuid kindlasti on seda mugavam lugeda google docsist.
+
+
+
+Ülesanne 3: Jump Search
+
+Jump search töötab põhimõttel, et massiivis olevate elementide summast võetakse ruutjuur, ning sellest saab hüppe suurus. Hüppeid tehakse seni, kuni jõutakse elemendini, mis on suurem kui otsitav ning seejärel minnakse üks hüpe tagasi ja alustatakse lineaarotsinguga.
+
+Näiteks on massiiv 10 elemendiga
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Ruutjuur 10st on ümardatult 3, seega sammu suurus on 3
+
+otsitav on 8
+
+Hüppame indeksile (ja arvule, kuna antud massiivis on indeks ja arv sama) 3.
+Võrdleme otsitavat ja indeksil olevat arvu. 8 > 3
+Hüppame indeksile 6
+Võrdleme otsitavat ja indeksil olevat arvu. 8 > 6
+Hüppame indeksile 9
+Võrdleme otsitavat ja indeksil olevat arvu. 8 < 9
+Läheme ühe hüppe võrra tagasi
+Alustame lineaar otsinguga
+8 > 6, seega liigume ühe indeksi võrra edasi
+8 > 7, seega liigume ühe indeksi võrra edasi
+8 = 8, otsitav väärtus on leitud.
+
+def jumpsearch (massiiv, otsitav)
+elemendid = len(massiiv)
+hüpe = sqrt(elemendid)
+i = 0
+while 
+
+Ülesanne 4
+
+Kolmikotsing jagab massiivi kolmeks. Massiiv peab olema sorditud nagu ka kahendotsingu puhul. Jagame massiivi kolmeks võrdseks osaks ning vaatame, millises massiivi osas võiks otsitav element paikneda. Toimib samamoodi nagu kahendotsing, lihtsalt jagame massiivi kolmeks.
+Võtame 2 keskmist
+keskmine1 = esimene + (viimane - esimene) // 3
+keskmine 2 = viimane - (viimane - esimene) // 3
+kui otsitav on võrdne kummagi keskmisega, siis tagastame indeksi
+if (massiiv[keskmine1] == otsitav):
+	return keskmine1
+if (massiiv[keskmine2] == otsitav):
+	return keskmine2
+if(otsitav < massiiv[keskmine1]):
+	return otsing(algusindeks 0, keskmine1 - 1, otsitav, massiiv)
+elif (otsitav > massiiv[keskmine2]):
+	return otsing(keskmine2 + 1, viimase elemendi indeks N, otsitav, massiiv)
+else:
+	return otsing (keskmine1 + 1, keskmine2 - 1, otsitav, massiiv)
+
+Kui otsitavat ei ole ka keskmine1 ja keskmine2 vahel, siis tagastame -1
+
+return -1
+
+Kolmikotsingu ajaline kompleksus on tegelikult suurem kui kahendotsingul, seega kolmikotsing on tegelikult aeglasem kui kahendotsing.
+
+Kahendotsingu aegkompleksus on log2(n), kuid kolmikotsingul on see 2* log3(n), kuna teeme 2 võrdlust. Vaadates igasugu reaalaja teste on ka reaalses maailmas kolmikotsing alati aeglasem kui kahendotsing. Toodi välja, et kolmikotsing on kasulik näiteks funktsiooni ekstreemumite leidmiseks kuid muul juhul on siiski mõistlikum kasutada kahendotsingut, kuna lisaks sellele, et see on kiirem on selle kood ka lühem ning lihtsam.
+
+Ülesanne 5
+
+Sõna otsimine sõnaraamatust.
+
+Sellise rakenduse puhul oleks lineaarotsing kõige aeglasem, kuna käiakse läbi kõik kirjed järjest ning kuna sõnaraamatus on väga palju kirjed. Lineaarotsing oleks sama kiire kahendotsinguga (või isegi kiirem) juhul, kui sõnu oleks sõnaraamatus alla 200. Kuna sõnu on sõnaraamatus siiski rohkem, on lineaarotsing antud rakenduses kõige aeglasem. Kui otsitav sõna on kõige viimane või seda ei esinegi, siis selle sõna otsimine võtab tohutult kaua aega.
+Kahendotsing oleks sellises rakenduses halvimal juhul kiirem, kuna kogu aeg tehakse loend pooleks.
+Arvan, et kõige kiirem sõnaraamatu puhul on jump search juhul, kui sõnaraamatus on alla 40 000 sõna. 
+Kui raamatus on 40000 sõna, siis jump searchis tuleb ühe hüppe suuruseks 200. Kui juhuslikult juhtub, et otsitav sõna on viimasest hüppest 1 indeks madalamal, minnakse üks hüpe tagasi, ning käiakse lineaar otsinguga kõik 200 elementi läbi. 
+
+Üks modifikatsioon, mida siin teha saaks oleks see, et kui otsitakse näiteks sõna peekon, siis lineaar otsing ei peaks hakkama otsima sõnaraamatu algusest. Otsing võiks vaadata sõna esimest tähte ning võtta alguseks esimese P tähega algava sõna. Täpselt samamoodi saaks ka teisi algoritme kiirendada. 
+
+Kui selline modifikatsioon lisada, oleks minu hinnangul kõige kiirem jump search.
+
+
+Boonusülesanne, Fibonacci search
+
+
+Fibonacci otsing jaotab massiivi kaheks sarnaselt, nagu kahendotsing, ainult et mõlema poole suurus pole võrdne, seega massiivi ei tehta keskelt pooleks. Pooleks tehakse massiiv fibonacci numbrite põhjal. Lisaks teeme jagamistehte asemel liitmistehte, mis kulutab vähem protsessori ressurssi ning on kiirem.
+
+Kõigepealt on meil massiiv näiteks 100 elemendiga, mis on sorditud väikseimast elemendist suurimani. Leiame fibonacci numbri, mis on võrdne või suurem kui massiivi suurus. Suurem kui 100 on 12s fibonacci number, mis on 144. Järgmiseks, me liigume 2 kohta tagasi, seega nüüd oleme fibonacci 10ndal kohal, mis on 55. Arvu 55 kasutame indeksina, mille põhjal jaotame massiivi kaheks. Nüüd võrdleme otsitavat arvu kahe poolega. Kui vasakul pool olev viimane arv on väiksem kui otsitav arv, siis võime vasaku poole kõrvale jätta. Kui vasakul pool olev viimane arv on aga suurem, jätame parema poole kõrvale ning jätkame otsingut vasakult. Seda teeme nii kaua, kuni leiame õige arvu.
+
+Kui andmeid on väga palju, näiteks mingi andmebaas, kus on kõik maailma IP aadressid, siis on fibonacci otsing kiirem kui teised otsingutüübid, kuna massiivi ei tehta keskelt pooleks, vaid tehakse poolitus (fibonacci kõige lähedasem või võrdne number -1 koht) kohalt. Selleks kasutatakse liitmistehet ning see pole protsessorile nii koormav. Samuti on pooled erineva suurusega ning võib juhtuda, et otsitav element on väiksemas pooles, seega tuleb käia läbi vähem elemente kui näiteks kahendotsingu puhul. Kolmikotsing on samuti aeglasem, kuna kasutab jagamistehet, mis on protsessorile koormavam, ning on nagunii aeglasem, kui kahendotsing.
+
